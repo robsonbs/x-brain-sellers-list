@@ -1,6 +1,5 @@
 package br.com.xbrain.sales.api.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -26,7 +25,7 @@ public class SellerController {
 
   @GetMapping
   public ResponseEntity<List<Seller>> index() {
-    return ResponseEntity.ok(new ArrayList<>());
+    return ResponseEntity.ok(sellerRepository.findAll());
   }
 
   @PostMapping
