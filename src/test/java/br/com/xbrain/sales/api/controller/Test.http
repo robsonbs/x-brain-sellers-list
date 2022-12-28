@@ -1,6 +1,9 @@
 ### GET request to welcome message
 GET http://localhost:3000/
 
+### GET request list of sellers
+GET http://localhost:3000/sellers
+
 ### POST request create new seller
 POST http://localhost:3000/sellers
 Accept: application/json;charset=UTF-8
