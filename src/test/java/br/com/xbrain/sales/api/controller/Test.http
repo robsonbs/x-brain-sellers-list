@@ -12,3 +12,12 @@ Content-Type: application/json;charset=UTF-8
 {
   "name": "Robson"
 }
+
+### POST request create new seller
+POST http://localhost:3000/sellers
+Accept: application/json;charset=UTF-8
+Content-Type: application/json;charset=UTF-8
+
+{
+  "name": "Ricardo Goulavatti"
+}
