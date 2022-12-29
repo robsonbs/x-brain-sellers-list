@@ -1,5 +1,6 @@
 package br.com.xbrain.sales.api.model;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
+@Entity
 @RequiredArgsConstructor
 public class Seller {
 
@@ -27,3 +29,4 @@ public class Seller {
     this.name = name;
   }
 }
+

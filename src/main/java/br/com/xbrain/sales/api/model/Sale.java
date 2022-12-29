@@ -9,16 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Getter
-@Setter
+@Data
 @Entity
 public class Sale {
 
@@ -26,11 +23,10 @@ public class Sale {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @NotBlank
+  @NotNull
   @Min(1)
   @Column(name = "value_in_cents")
   private Long value;
-  @NotBlank
   @NotNull
   @ManyToOne
   private Seller seller;
