@@ -1,6 +1,9 @@
 ### GET request to welcome message
 GET http://localhost:3000/
 
+### GET request list of sales
+GET http://localhost:3000/sales
+
 ### GET request list of sellers
 GET http://localhost:3000/sellers
 
