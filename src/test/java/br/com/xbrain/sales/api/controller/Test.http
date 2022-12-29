@@ -4,6 +4,21 @@ GET http://localhost:3000/
 ### GET request list of sales
 GET http://localhost:3000/sales
 
+### POST request of new sale
+POST http://localhost:3000/sales
+Accept: application/json;charset=UTF-8
+Content-Type: application/json;charset=UTF-8
+
+{
+  "id": 140,
+  "createdAt": "2022-12-28T22:00",
+  "value": 1000,
+  "seller": {
+    "id": 1,
+    "name": "Robson"
+  }
+}
+
 ### GET request list of sellers
 GET http://localhost:3000/sellers
 
