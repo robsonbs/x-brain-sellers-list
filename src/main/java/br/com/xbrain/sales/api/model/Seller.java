@@ -1,20 +1,18 @@
 package br.com.xbrain.sales.api.model;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Getter
-@Setter
-@Entity
+@Data
+@RequiredArgsConstructor
 public class Seller {
 
   @EqualsAndHashCode.Include
@@ -24,4 +22,8 @@ public class Seller {
   @NotBlank
   @Size(min = 3, max = 128)
   private String name;
+
+  public Seller(String name) {
+    this.name = name;
+  }
 }
