@@ -15,7 +15,6 @@ import static org.mockito.Mockito.when;
 public class RegisterUseCaseTest {
 
   private final SellerRepository sellerRepository = Mockito.mock(SellerRepository.class);
-
   private RegisterUseCase registerUseCase;
 
   @BeforeEach
@@ -29,5 +28,17 @@ public class RegisterUseCaseTest {
     Seller seller = new Seller();
     Seller savedSeller = registerUseCase.registerSeller(seller);
     Assertions.assertThat(savedSeller).isNull();
+  }
+
+  @Test
+  void testNotSaveSellerWithNameSizeSmallerThanThreeLetters() {
+    String[] names = {"", "A", "Sa"};
+    Seller seller;
+    Seller savedSeller;
+    for (String name : names) {
+      seller = new Seller(name);
+      savedSeller = registerUseCase.registerSeller(seller);
+      Assertions.assertThat(savedSeller).isNull();
+    }
   }
 }
