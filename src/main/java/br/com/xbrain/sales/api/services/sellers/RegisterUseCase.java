@@ -12,7 +12,8 @@ public class RegisterUseCase {
   private final SellerRepository sellerRepository;
 
   public Seller registerSeller(Seller seller) {
-    if (seller.getName() == null) {return null;}
+    if (seller.getName() == null || seller.getName().strip().length() < 3) {return null;}
+
     return sellerRepository.save(seller);
   }
 }
