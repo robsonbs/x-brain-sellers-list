@@ -2,31 +2,34 @@ package br.com.xbrain.sales.api.service.sellers;
 
 import br.com.xbrain.sales.api.model.Seller;
 import br.com.xbrain.sales.api.repository.SellerRepository;
-import br.com.xbrain.sales.api.services.sellers.RegisterUseCase;
+import br.com.xbrain.sales.api.services.sellers.RegisterSellerUseCase;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class RegisterUseCaseTest {
+public class RegisterSellerUseCaseTest {
 
-  private final SellerRepository sellerRepository = Mockito.mock(SellerRepository.class);
-  private RegisterUseCase registerUseCase;
+  @Mock
+  private SellerRepository sellerRepository;
+  private RegisterSellerUseCase registerSellerUseCase;
 
   @BeforeEach
   void initUseCase() {
-    registerUseCase = new RegisterUseCase(sellerRepository);
+    MockitoAnnotations.openMocks(this);
+    registerSellerUseCase = new RegisterSellerUseCase(sellerRepository);
     when(sellerRepository.save(any(Seller.class))).then(returnsFirstArg());
   }
 
   @Test
   void testNotSaveSellersWithoutName() {
     Seller seller = new Seller();
-    Seller savedSeller = registerUseCase.registerSeller(seller);
+    Seller savedSeller = registerSellerUseCase.registerSeller(seller);
     Assertions.assertThat(savedSeller).isNull();
   }
 
@@ -37,7 +40,7 @@ public class RegisterUseCaseTest {
     Seller savedSeller;
     for (String name : names) {
       seller = new Seller(name);
-      savedSeller = registerUseCase.registerSeller(seller);
+      savedSeller = registerSellerUseCase.registerSeller(seller);
       Assertions.assertThat(savedSeller).isNull();
     }
   }
@@ -46,7 +49,7 @@ public class RegisterUseCaseTest {
   void testSaveSeller() {
     String name = "Robson";
     Seller seller = new Seller(name);
-    Seller savedSeller = registerUseCase.registerSeller(seller);
+    Seller savedSeller = registerSellerUseCase.registerSeller(seller);
     Assertions.assertThat(savedSeller).isNotNull();
   }
 }

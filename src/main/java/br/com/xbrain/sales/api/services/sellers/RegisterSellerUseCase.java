@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RegisterUseCase {
+public class RegisterSellerUseCase {
 
   private final SellerRepository sellerRepository;
 

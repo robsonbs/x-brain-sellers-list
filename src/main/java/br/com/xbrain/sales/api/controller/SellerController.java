@@ -6,7 +6,7 @@ import javax.validation.Valid;
 
 import br.com.xbrain.sales.api.model.Seller;
 import br.com.xbrain.sales.api.repository.SellerRepository;
-import br.com.xbrain.sales.api.services.sellers.RegisterUseCase;
+import br.com.xbrain.sales.api.services.sellers.RegisterSellerUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SellerController {
 
   private final SellerRepository sellerRepository;
-  private final RegisterUseCase registerUseCase;
+  private final RegisterSellerUseCase registerSellerUseCase;
 
   @GetMapping
   public ResponseEntity<List<Seller>> index() {
@@ -34,6 +34,6 @@ public class SellerController {
   @ResponseStatus(HttpStatus.CREATED)
   public Seller adicionar(@Valid @RequestBody Seller seller) {
 
-    return registerUseCase.registerSeller(seller);
+    return registerSellerUseCase.registerSeller(seller);
   }
 }
