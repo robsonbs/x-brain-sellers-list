@@ -41,4 +41,12 @@ public class RegisterUseCaseTest {
       Assertions.assertThat(savedSeller).isNull();
     }
   }
+
+  @Test
+  void testSaveSeller() {
+    String name = "Robson";
+    Seller seller = new Seller(name);
+    Seller savedSeller = registerUseCase.registerSeller(seller);
+    Assertions.assertThat(savedSeller).isNotNull();
+  }
 }
