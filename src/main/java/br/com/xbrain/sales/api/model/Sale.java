@@ -40,7 +40,7 @@ public class Sale {
     private LocalDateTime createdAt;
 
     public boolean isValid() {
-        if (seller == null || !seller.isValid() ||  seller.getId() == null) {
+        if (seller == null || !seller.isValid() || seller.getId() == null) {
             throw new BusinessException("Seller Not Valid!");
         }
         if (value <= 0) {

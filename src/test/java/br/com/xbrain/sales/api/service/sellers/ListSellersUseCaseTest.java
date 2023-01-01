@@ -2,6 +2,7 @@ package br.com.xbrain.sales.api.service.sellers;
 
 import java.time.LocalDateTime;
 
+import br.com.xbrain.sales.api.model.input.DateInterval;
 import br.com.xbrain.sales.api.services.sellers.ListSellersUseCase;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,9 +16,9 @@ public class ListSellersUseCaseTest {
      */
     @Test
     void testListOfSellersWithSale() {
-
-        listSellersUseCase.getList(getDateStart(), getDateEnd());
-        Assertions.assertThat(listSellersUseCase.getList(getDateStart(), getDateEnd())).hasSize(0);
+        DateInterval dateInterval = DateInterval.builder().build();
+        listSellersUseCase.getList(dateInterval);
+        Assertions.assertThat(listSellersUseCase.getList(dateInterval)).hasSize(0);
     }
 
     private LocalDateTime getDateStart() {
