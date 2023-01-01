@@ -46,15 +46,14 @@ public class RegisterSaleUseCaseTest {
         assertEquals("Seller Not Valid!", error.getMessage());
 
         sale.getSeller().setName("Robson");
-        error =
-            assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
+        error = assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
         assertEquals("Seller Not Valid!", error.getMessage());
     }
 
     @Test
     void testNotSaveSaleWithValueLessOrEqualThanZeroCents() {
         Sale sale = new Sale();
-        sale.setSeller(new Seller("Robson"));
+        sale.setSeller(getSeller());
         sale.setValue(0L);
         BusinessException error =
             assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
@@ -68,11 +67,15 @@ public class RegisterSaleUseCaseTest {
     @Test
     void testNotSaveSaleWithoutDateValid() {
         Sale sale = new Sale();
-        sale.setSeller(new Seller("Robson"));
         sale.setValue(1L);
-
+        sale.setSeller(getSeller());
+        sale.getSeller().setId(1L);
         BusinessException error =
             assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
         assertEquals("Date must be valid!", error.getMessage());
+    }
+
+    private Seller getSeller() {
+        return Seller.builder().name("Robson").id(1L).build();
     }
 }
