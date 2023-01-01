@@ -31,4 +31,11 @@ public class Sale {
   @ManyToOne
   private Seller seller;
   private LocalDateTime createdAt;
+
+  public boolean isValid() {
+    if (seller == null) {
+      return false;
+    }
+    return true;
+  }
 }
