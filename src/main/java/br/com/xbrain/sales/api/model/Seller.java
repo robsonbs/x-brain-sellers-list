@@ -28,5 +28,12 @@ public class Seller {
   public Seller(String name) {
     this.name = name;
   }
+
+  public boolean isValid() {
+    if (getName().isBlank() || getName().length() < 3) {
+      return false;
+    }
+    return true;
+  }
 }
 

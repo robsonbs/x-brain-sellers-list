@@ -34,7 +34,7 @@ public class Sale {
   private LocalDateTime createdAt;
 
   public boolean isValid() {
-    if (seller == null) {
+    if (seller == null || !seller.isValid()) {
       throw new BusinessException("Seller Not Valid!");
     }
     return true;
