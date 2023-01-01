@@ -6,7 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import br.com.xbrain.sales.api.model.Sale;
-import br.com.xbrain.sales.api.services.sales.RegisterSalesUseCase;
+import br.com.xbrain.sales.api.services.sales.RegisterSaleUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sales")
 public class SaleController {
 
-  private final RegisterSalesUseCase registerSalesUseCase;
+  private final RegisterSaleUseCase registerSalesUseCase;
 
   @GetMapping
   public ResponseEntity<List<Sale>> index() {
