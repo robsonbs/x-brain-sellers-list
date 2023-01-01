@@ -44,6 +44,11 @@ public class RegisterSaleUseCaseTest {
         BusinessException error =
             assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
         assertEquals("Seller Not Valid!", error.getMessage());
+
+        sale.getSeller().setName("Robson");
+        error =
+            assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
+        assertEquals("Seller Not Valid!", error.getMessage());
     }
 
     @Test
