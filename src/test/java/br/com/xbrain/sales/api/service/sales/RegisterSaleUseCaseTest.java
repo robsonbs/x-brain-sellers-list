@@ -54,8 +54,8 @@ public class RegisterSaleUseCaseTest {
     BusinessException error =
       assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
     assertEquals("Value must be greater than zero!", error.getMessage());
-    sale.setValue(0L);
 
+    sale.setValue(-5L);
     error = assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
     assertEquals("Value must be greater than zero!", error.getMessage());
   }
