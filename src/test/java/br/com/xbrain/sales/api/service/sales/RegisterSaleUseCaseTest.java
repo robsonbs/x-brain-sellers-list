@@ -2,6 +2,7 @@ package br.com.xbrain.sales.api.service.sales;
 
 import br.com.xbrain.sales.api.exceptions.BusinessException;
 import br.com.xbrain.sales.api.model.Sale;
+import br.com.xbrain.sales.api.model.Seller;
 import br.com.xbrain.sales.api.repository.SaleRepository;
 import br.com.xbrain.sales.api.services.sales.RegisterSaleUseCase;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,6 +32,15 @@ public class RegisterSaleUseCaseTest {
   @Test
   void testNotSaveSaleWithoutSeller() {
     Sale sale = new Sale();
+    BusinessException error =
+      assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
+    assertEquals("Seller Not Valid!", error.getMessage());
+  }
+
+  @Test
+  void testNotSaveSaleWithInvalidSeller() {
+    Sale sale = new Sale();
+    sale.setSeller(new Seller("R"));
     BusinessException error =
       assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
     assertEquals("Seller Not Valid!", error.getMessage());
