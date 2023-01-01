@@ -85,6 +85,14 @@ public class RegisterSaleUseCaseTest {
         Assertions.assertThat(savedSale).isNull();
     }
 
+    @Test
+    void testSaveSaleValid() {
+        Sale sale =
+            Sale.builder().id(1L).seller(getSeller()).value(1000L).createdAt(getDate()).build();
+        Sale savedSale = registerSaleUseCase.registerSale(sale);
+        Assertions.assertThat(savedSale).isNotNull();
+    }
+
     private LocalDateTime getDate() {
         return LocalDateTime.parse("2022-12-20T13:00:00");
     }
