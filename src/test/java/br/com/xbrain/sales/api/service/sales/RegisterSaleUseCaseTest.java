@@ -1,10 +1,13 @@
 package br.com.xbrain.sales.api.service.sales;
 
+import java.time.LocalDateTime;
+
 import br.com.xbrain.sales.api.exceptions.BusinessException;
 import br.com.xbrain.sales.api.model.Sale;
 import br.com.xbrain.sales.api.model.Seller;
 import br.com.xbrain.sales.api.repository.SaleRepository;
 import br.com.xbrain.sales.api.services.sales.RegisterSaleUseCase;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -73,6 +76,17 @@ public class RegisterSaleUseCaseTest {
         BusinessException error =
             assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
         assertEquals("Date must be valid!", error.getMessage());
+    }
+
+    @Test
+    void testNotSaveSaleWithoutId() {
+        Sale sale = Sale.builder().seller(getSeller()).value(1000L).createdAt(getDate()).build();
+        Sale savedSale = registerSaleUseCase.registerSale(sale);
+        Assertions.assertThat(savedSale).isNull();
+    }
+
+    private LocalDateTime getDate() {
+        return LocalDateTime.parse("2022-12-20T13:00:00");
     }
 
     private Seller getSeller() {
