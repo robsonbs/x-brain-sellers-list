@@ -12,7 +12,7 @@ public class RegisterSaleUseCase {
     private final SaleRepository saleRepository;
 
     public Sale registerSale(Sale sale) {
-        if (!sale.isValid()) {return null;}
+        if (!sale.isValid() || sale.getId() == null) {return null;}
         return saleRepository.save(sale);
     }
 }
