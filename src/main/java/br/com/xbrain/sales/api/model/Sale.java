@@ -37,6 +37,9 @@ public class Sale {
     if (seller == null || !seller.isValid()) {
       throw new BusinessException("Seller Not Valid!");
     }
+    if (value <= 0) {
+      throw new BusinessException("Value must be greater than zero!");
+    }
     return true;
   }
 }
