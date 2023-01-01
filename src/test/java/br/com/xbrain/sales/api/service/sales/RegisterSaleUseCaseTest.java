@@ -45,4 +45,18 @@ public class RegisterSaleUseCaseTest {
       assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
     assertEquals("Seller Not Valid!", error.getMessage());
   }
+
+  @Test
+  void testNotSaveSaleWithValueLessOrEqualThanZeroCents() {
+    Sale sale = new Sale();
+    sale.setSeller(new Seller("Robson"));
+    sale.setValue(0L);
+    BusinessException error =
+      assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
+    assertEquals("Value must be greater than zero!", error.getMessage());
+    sale.setValue(0L);
+
+    error = assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
+    assertEquals("Value must be greater than zero!", error.getMessage());
+  }
 }
