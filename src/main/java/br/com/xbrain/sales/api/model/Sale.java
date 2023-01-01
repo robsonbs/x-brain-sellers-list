@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import br.com.xbrain.sales.api.exceptions.BusinessException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -34,7 +35,7 @@ public class Sale {
 
   public boolean isValid() {
     if (seller == null) {
-      return false;
+      throw new BusinessException("Seller Not Valid!");
     }
     return true;
   }
