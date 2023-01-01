@@ -59,4 +59,15 @@ public class RegisterSaleUseCaseTest {
         error = assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
         assertEquals("Value must be greater than zero!", error.getMessage());
     }
+
+    @Test
+    void testNotSaveSaleWithoutDateValid() {
+        Sale sale = new Sale();
+        sale.setSeller(new Seller("Robson"));
+        sale.setValue(1L);
+
+        BusinessException error =
+            assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
+        assertEquals("Date must be valid!", error.getMessage());
+    }
 }
