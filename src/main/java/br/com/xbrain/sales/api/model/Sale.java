@@ -40,6 +40,9 @@ public class Sale {
         if (value <= 0) {
             throw new BusinessException("Value must be greater than zero!");
         }
+        if (createdAt == null) {
+            throw new BusinessException("Date must be valid!");
+        }
         return true;
     }
 }
