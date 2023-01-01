@@ -14,10 +14,15 @@ public class ListSellersUseCaseTest {
     /* Retornar a lista de vendedores com os campos: nome, total de vendas do vendedor e média de
     vendas diária, conforme o período informado por parâmetro
      */
+    @BeforeEach
+    void initUseCase() {
+        listSellersUseCase = new ListSellersUseCase();
+    }
+
     @Test
     void testListOfSellersWithSale() {
-        DateInterval dateInterval = DateInterval.builder().build();
-        listSellersUseCase.getList(dateInterval);
+        DateInterval dateInterval =
+            DateInterval.builder().startDate(getDateStart()).endDate(getDateEnd()).build();
         Assertions.assertThat(listSellersUseCase.getList(dateInterval)).hasSize(0);
     }
 
