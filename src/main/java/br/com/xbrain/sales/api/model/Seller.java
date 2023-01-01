@@ -17,23 +17,23 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Seller {
 
-  @EqualsAndHashCode.Include
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-  @NotBlank
-  @Size(min = 3, max = 128)
-  private String name;
+    @EqualsAndHashCode.Include
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotBlank
+    @Size(min = 3, max = 128)
+    private String name;
 
-  public Seller(String name) {
-    this.name = name;
-  }
-
-  public boolean isValid() {
-    if (getName().isBlank() || getName().length() < 3) {
-      return false;
+    public Seller(String name) {
+        this.name = name;
     }
-    return true;
-  }
+
+    public boolean isValid() {
+        if (getName().isBlank() || getName().length() < 3) {
+            return false;
+        }
+        return true;
+    }
 }
 

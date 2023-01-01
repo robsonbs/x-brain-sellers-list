@@ -22,18 +22,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sellers")
 public class SellerController {
 
-  private final SellerRepository sellerRepository;
-  private final RegisterSellerUseCase registerSellerUseCase;
+    private final SellerRepository sellerRepository;
+    private final RegisterSellerUseCase registerSellerUseCase;
 
-  @GetMapping
-  public ResponseEntity<List<Seller>> index() {
-    return ResponseEntity.ok(sellerRepository.findAll());
-  }
+    @GetMapping
+    public ResponseEntity<List<Seller>> index() {
+        return ResponseEntity.ok(sellerRepository.findAll());
+    }
 
-  @PostMapping
-  @ResponseStatus(HttpStatus.CREATED)
-  public Seller adicionar(@Valid @RequestBody Seller seller) {
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Seller adicionar(@Valid @RequestBody Seller seller) {
 
-    return registerSellerUseCase.registerSeller(seller);
-  }
+        return registerSellerUseCase.registerSeller(seller);
+    }
 }

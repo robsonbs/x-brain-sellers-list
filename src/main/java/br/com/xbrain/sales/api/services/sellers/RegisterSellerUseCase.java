@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RegisterSellerUseCase {
 
-  private final SellerRepository sellerRepository;
+    private final SellerRepository sellerRepository;
 
-  public Seller registerSeller(Seller seller) {
-    if (seller.getName() == null || seller.getName().strip().length() < 3) {return null;}
+    public Seller registerSeller(Seller seller) {
+        if (seller.getName() == null || seller.getName().strip().length() < 3) {return null;}
 
-    return sellerRepository.save(seller);
-  }
+        return sellerRepository.save(seller);
+    }
 }

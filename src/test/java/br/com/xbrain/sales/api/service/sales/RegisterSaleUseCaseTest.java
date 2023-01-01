@@ -18,45 +18,45 @@ import static org.mockito.Mockito.when;
 
 public class RegisterSaleUseCaseTest {
 
-  RegisterSaleUseCase registerSaleUseCase;
-  @Mock
-  SaleRepository saleRepository;
+    RegisterSaleUseCase registerSaleUseCase;
+    @Mock
+    SaleRepository saleRepository;
 
-  @BeforeEach
-  void initUseCase() {
-    MockitoAnnotations.openMocks(this);
-    registerSaleUseCase = new RegisterSaleUseCase(saleRepository);
-    when(saleRepository.save(any(Sale.class))).then(returnsFirstArg());
-  }
+    @BeforeEach
+    void initUseCase() {
+        MockitoAnnotations.openMocks(this);
+        registerSaleUseCase = new RegisterSaleUseCase(saleRepository);
+        when(saleRepository.save(any(Sale.class))).then(returnsFirstArg());
+    }
 
-  @Test
-  void testNotSaveSaleWithoutSeller() {
-    Sale sale = new Sale();
-    BusinessException error =
-      assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
-    assertEquals("Seller Not Valid!", error.getMessage());
-  }
+    @Test
+    void testNotSaveSaleWithoutSeller() {
+        Sale sale = new Sale();
+        BusinessException error =
+            assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
+        assertEquals("Seller Not Valid!", error.getMessage());
+    }
 
-  @Test
-  void testNotSaveSaleWithInvalidSeller() {
-    Sale sale = new Sale();
-    sale.setSeller(new Seller("R"));
-    BusinessException error =
-      assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
-    assertEquals("Seller Not Valid!", error.getMessage());
-  }
+    @Test
+    void testNotSaveSaleWithInvalidSeller() {
+        Sale sale = new Sale();
+        sale.setSeller(new Seller("R"));
+        BusinessException error =
+            assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
+        assertEquals("Seller Not Valid!", error.getMessage());
+    }
 
-  @Test
-  void testNotSaveSaleWithValueLessOrEqualThanZeroCents() {
-    Sale sale = new Sale();
-    sale.setSeller(new Seller("Robson"));
-    sale.setValue(0L);
-    BusinessException error =
-      assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
-    assertEquals("Value must be greater than zero!", error.getMessage());
+    @Test
+    void testNotSaveSaleWithValueLessOrEqualThanZeroCents() {
+        Sale sale = new Sale();
+        sale.setSeller(new Seller("Robson"));
+        sale.setValue(0L);
+        BusinessException error =
+            assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
+        assertEquals("Value must be greater than zero!", error.getMessage());
 
-    sale.setValue(-5L);
-    error = assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
-    assertEquals("Value must be greater than zero!", error.getMessage());
-  }
+        sale.setValue(-5L);
+        error = assertThrows(BusinessException.class, () -> registerSaleUseCase.registerSale(sale));
+        assertEquals("Value must be greater than zero!", error.getMessage());
+    }
 }

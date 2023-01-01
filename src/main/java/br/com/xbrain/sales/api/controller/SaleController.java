@@ -20,15 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sales")
 public class SaleController {
 
-  private final RegisterSaleUseCase registerSalesUseCase;
+    private final RegisterSaleUseCase registerSalesUseCase;
 
-  @GetMapping
-  public ResponseEntity<List<Sale>> index() {
-    return ResponseEntity.ok(new ArrayList<>());
-  }
+    @GetMapping
+    public ResponseEntity<List<Sale>> index() {
+        return ResponseEntity.ok(new ArrayList<>());
+    }
 
-  @PostMapping
-  public ResponseEntity<Sale> create(@Valid @RequestBody Sale sale) {
-    return ResponseEntity.ok(registerSalesUseCase.registerSale(sale));
-  }
+    @PostMapping
+    public ResponseEntity<Sale> create(@Valid @RequestBody Sale sale) {
+        return ResponseEntity.ok(registerSalesUseCase.registerSale(sale));
+    }
 }

@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RegisterSaleUseCase {
 
-  private final SaleRepository saleRepository;
+    private final SaleRepository saleRepository;
 
-  public Sale registerSale(Sale sale) {
-    if (!sale.isValid()) {return null;}
-    return saleRepository.save(sale);
-  }
+    public Sale registerSale(Sale sale) {
+        if (!sale.isValid()) {return null;}
+        return saleRepository.save(sale);
+    }
 }

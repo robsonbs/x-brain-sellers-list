@@ -15,41 +15,41 @@ import static org.mockito.Mockito.when;
 
 public class RegisterSellerUseCaseTest {
 
-  @Mock
-  private SellerRepository sellerRepository;
-  private RegisterSellerUseCase registerSellerUseCase;
+    @Mock
+    private SellerRepository sellerRepository;
+    private RegisterSellerUseCase registerSellerUseCase;
 
-  @BeforeEach
-  void initUseCase() {
-    MockitoAnnotations.openMocks(this);
-    registerSellerUseCase = new RegisterSellerUseCase(sellerRepository);
-    when(sellerRepository.save(any(Seller.class))).then(returnsFirstArg());
-  }
-
-  @Test
-  void testNotSaveSellersWithoutName() {
-    Seller seller = new Seller();
-    Seller savedSeller = registerSellerUseCase.registerSeller(seller);
-    Assertions.assertThat(savedSeller).isNull();
-  }
-
-  @Test
-  void testNotSaveSellerWithNameSizeSmallerThanThreeLetters() {
-    String[] names = {"", "A", "Sa"};
-    Seller seller;
-    Seller savedSeller;
-    for (String name : names) {
-      seller = new Seller(name);
-      savedSeller = registerSellerUseCase.registerSeller(seller);
-      Assertions.assertThat(savedSeller).isNull();
+    @BeforeEach
+    void initUseCase() {
+        MockitoAnnotations.openMocks(this);
+        registerSellerUseCase = new RegisterSellerUseCase(sellerRepository);
+        when(sellerRepository.save(any(Seller.class))).then(returnsFirstArg());
     }
-  }
 
-  @Test
-  void testSaveSeller() {
-    String name = "Robson";
-    Seller seller = new Seller(name);
-    Seller savedSeller = registerSellerUseCase.registerSeller(seller);
-    Assertions.assertThat(savedSeller).isNotNull();
-  }
+    @Test
+    void testNotSaveSellersWithoutName() {
+        Seller seller = new Seller();
+        Seller savedSeller = registerSellerUseCase.registerSeller(seller);
+        Assertions.assertThat(savedSeller).isNull();
+    }
+
+    @Test
+    void testNotSaveSellerWithNameSizeSmallerThanThreeLetters() {
+        String[] names = {"", "A", "Sa"};
+        Seller seller;
+        Seller savedSeller;
+        for (String name : names) {
+            seller = new Seller(name);
+            savedSeller = registerSellerUseCase.registerSeller(seller);
+            Assertions.assertThat(savedSeller).isNull();
+        }
+    }
+
+    @Test
+    void testSaveSeller() {
+        String name = "Robson";
+        Seller seller = new Seller(name);
+        Seller savedSeller = registerSellerUseCase.registerSeller(seller);
+        Assertions.assertThat(savedSeller).isNotNull();
+    }
 }

@@ -10,13 +10,13 @@ Accept: application/json;charset=UTF-8
 Content-Type: application/json;charset=UTF-8
 
 {
-  "id": 140,
-  "createdAt": "2022-12-28T22:00",
-  "value": 1000,
-  "seller": {
-    "id": 1,
-    "name": "Robson"
-  }
+    "id": 140,
+    "createdAt": "2022-12-28T22:00",
+    "value": 1000,
+    "seller": {
+        "id": 1,
+        "name": "Robson"
+    }
 }
 
 ### GET request list of sellers
@@ -28,7 +28,7 @@ Accept: application/json;charset=UTF-8
 Content-Type: application/json;charset=UTF-8
 
 {
-  "name": "Robson"
+    "name": "Robson"
 }
 
 ### POST request create new seller
@@ -37,5 +37,5 @@ Accept: application/json;charset=UTF-8
 Content-Type: application/json;charset=UTF-8
 
 {
-  "name": "Ricardo Goulavatti"
+    "name": "Ricardo Goulavatti"
 }
