@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import br.com.xbrain.sales.api.model.Sale;
 import br.com.xbrain.sales.api.model.Seller;
@@ -37,18 +38,41 @@ public class ListSellersUseCaseTest {
         Sale otherSeller = getSale();
         otherSeller.setSeller(Seller.builder().name("Ricardo").id(5L).build());
 
-        when(saleRepository.findAll()).thenReturn(new ArrayList<>())
+        Sale saleWithOtherValue = getSale();
+        saleWithOtherValue.setValue(100L);
+
+        when(saleRepository.findAll()).thenReturn(
+                Arrays.asList(getSale(), saleWithOtherValue, otherSeller))
+            .thenReturn(Arrays.asList(getSale(), getSale(), otherSeller))
             .thenReturn(Collections.singletonList(getSale()))
-            .thenReturn(Arrays.asList(getSale(), getSale(), otherSeller));
+            .thenReturn(new ArrayList<>());
     }
 
     @Test
     void testListOfSellersWithSale() {
         DateInterval dateInterval =
             DateInterval.builder().startDate(getDateStart()).endDate(getDateEnd()).build();
-        Assertions.assertThat(listSellersUseCase.getList(dateInterval)).hasSize(0);
-        Assertions.assertThat(listSellersUseCase.getList(dateInterval)).hasSize(1);
         Assertions.assertThat(listSellersUseCase.getList(dateInterval)).hasSize(2);
+        Assertions.assertThat(listSellersUseCase.getList(dateInterval)).hasSize(2);
+        Assertions.assertThat(listSellersUseCase.getList(dateInterval)).hasSize(1);
+        Assertions.assertThat(listSellersUseCase.getList(dateInterval)).hasSize(0);
+    }
+
+    @Test
+    void testValuesOnSellersList() {
+        DateInterval dateInterval =
+            DateInterval.builder().startDate(getDateStart()).endDate(getDateEnd()).build();
+        List<br.com.xbrain.sales.api.model.output.Seller> sellers =
+            listSellersUseCase.getList(dateInterval);
+
+        Assertions.assertThat(sellers).hasSize(2);
+
+        org.junit.jupiter.api.Assertions.assertEquals(2, sellers.get(0).getTotalQuantity());
+        org.junit.jupiter.api.Assertions.assertEquals(1100, sellers.get(0).getTotalValue());
+        org.junit.jupiter.api.Assertions.assertEquals(550, sellers.get(0).getSales().get(0).getAverage());
+
+        org.junit.jupiter.api.Assertions.assertEquals(1, sellers.get(1).getTotalQuantity());
+        org.junit.jupiter.api.Assertions.assertEquals(1000, sellers.get(1).getTotalValue());
     }
 
     private Sale getSale() {
