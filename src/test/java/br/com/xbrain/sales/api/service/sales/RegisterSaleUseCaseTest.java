@@ -100,4 +100,5 @@ public class RegisterSaleUseCaseTest {
     private Seller getSeller() {
         return Seller.builder().name("Robson").id(1L).build();
     }
+
 }
