@@ -14,7 +14,6 @@ import br.com.xbrain.sales.api.services.sellers.ListSellersUseCase;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -43,8 +42,7 @@ public class ListSellersUseCaseTest {
         Sale saleWithOtherValue = getSale();
         saleWithOtherValue.setValue(100L);
 
-        when(saleRepository.findSalesByCreatedAtBetween(any(),
-                                                        any())).thenReturn(
+        when(saleRepository.findSalesByCreatedAtBetween(any(), any())).thenReturn(
                 Arrays.asList(getSale(), saleWithOtherValue, otherSeller))
             .thenReturn(Arrays.asList(getSale(), getSale(), otherSeller))
             .thenReturn(Collections.singletonList(getSale()))
@@ -72,7 +70,10 @@ public class ListSellersUseCaseTest {
 
         org.junit.jupiter.api.Assertions.assertEquals(2, sellers.get(0).getTotalQuantity());
         org.junit.jupiter.api.Assertions.assertEquals(1100, sellers.get(0).getTotalValue());
-        org.junit.jupiter.api.Assertions.assertEquals(550, sellers.get(0).getSales().get(0).getAverage());
+        org.junit.jupiter.api.Assertions.assertEquals(550, sellers.get(0)
+            .getSales()
+            .get(0)
+            .getAverage());
 
         org.junit.jupiter.api.Assertions.assertEquals(1, sellers.get(1).getTotalQuantity());
         org.junit.jupiter.api.Assertions.assertEquals(1000, sellers.get(1).getTotalValue());
