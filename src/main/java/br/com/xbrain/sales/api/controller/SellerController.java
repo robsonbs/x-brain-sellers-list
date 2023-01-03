@@ -3,9 +3,12 @@ package br.com.xbrain.sales.api.controller;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import br.com.xbrain.sales.api.model.Seller;
+import br.com.xbrain.sales.api.model.input.DateInterval;
 import br.com.xbrain.sales.api.repository.SellerRepository;
+import br.com.xbrain.sales.api.services.sellers.ListSellersUseCase;
 import br.com.xbrain.sales.api.services.sellers.RegisterSellerUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,10 +27,11 @@ public class SellerController {
 
     private final SellerRepository sellerRepository;
     private final RegisterSellerUseCase registerSellerUseCase;
+    private final ListSellersUseCase listSellersUseCase;
 
-    @GetMapping
-    public ResponseEntity<List<Seller>> index() {
-        return ResponseEntity.ok(sellerRepository.findAll());
+    @PostMapping("/report")
+    public ResponseEntity<List<br.com.xbrain.sales.api.model.output.Seller>> index(@RequestBody @NotNull DateInterval dates) {
+        return ResponseEntity.ok(listSellersUseCase.getList(dates));
     }
 
     @PostMapping

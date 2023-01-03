@@ -18,7 +18,8 @@ public class ListSellersUseCase {
     SaleRepository saleRepository;
 
     public List<Seller> getList(DateInterval dateInterval) {
-        List<Sale> sales = saleRepository.findAll();
+        List<Sale> sales = saleRepository.findSalesByCreatedAtBetween(dateInterval.getStartDate()
+            ,dateInterval.getEndDate());
         List<Seller> sellers = new ArrayList<>();
         sales.forEach(item -> {
             Seller findSeller = sellers.stream()

@@ -14,9 +14,11 @@ import br.com.xbrain.sales.api.services.sellers.ListSellersUseCase;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 public class ListSellersUseCaseTest {
@@ -41,7 +43,8 @@ public class ListSellersUseCaseTest {
         Sale saleWithOtherValue = getSale();
         saleWithOtherValue.setValue(100L);
 
-        when(saleRepository.findAll()).thenReturn(
+        when(saleRepository.findSalesByCreatedAtBetween(any(),
+                                                        any())).thenReturn(
                 Arrays.asList(getSale(), saleWithOtherValue, otherSeller))
             .thenReturn(Arrays.asList(getSale(), getSale(), otherSeller))
             .thenReturn(Collections.singletonList(getSale()))

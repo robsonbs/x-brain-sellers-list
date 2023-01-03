@@ -10,9 +10,9 @@ Accept: application/json;charset=UTF-8
 Content-Type: application/json;charset=UTF-8
 
 {
-    "id": 140,
-    "createdAt": "2022-12-28T22:00",
-    "value": 1000,
+    "id": 1540,
+    "createdAt": "2022-12-21T22:00",
+    "value": 1500,
     "seller": {
         "id": 1,
         "name": "Robson"
@@ -38,4 +38,14 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "name": "Ricardo Goulavatti"
+}
+
+###
+POST http://localhost:3000/sellers/report
+Accept: application/json;charset=UTF-8
+Content-Type: application/json;charset=UTF-8
+
+{
+    "startDate": "2022-12-20T13:00:00",
+    "endDate": "2022-12-31T13:00:00"
 }
